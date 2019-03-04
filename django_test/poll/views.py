@@ -1,26 +1,43 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse
-from .models import Question
+from django.http import HttpResponse, HttpResponseRedirect
+from django.contrib.auth.decorators import login_required
+from django.contrib import auth
+
 
 # Create your views here.
+# def set_func(func):
+#     def call_func(a):
+#         if a.method == "GET":
+#             return HttpResponse("错误404")
+#         func(a)
+#     return call_func
 
 
 def index(request):
-    latest_question_list = Question.objects.order_by('-pub_date')[:5]
-    context = {'latest_question_list': latest_question_list}
-    return render(request, 'poll/index.html', context)
+    if request.method == "GET":
+        return render(request, 'index.html')
+    else:
+        username = request.POST.get("username", "")
+        password = request.POST.get("password", "")
+
+        if username == "" or password == "":
+            return render(request, 'index.html', {'error': '用户名密码为空'})
+
+        user = auth.authenticate(username=username, password=password)
+        if user is None:
+            return render(request, "index.html", {
+                "error": "用户名或密码错误"})
+        else:
+            auth.login(request, user)  # 记录用户的登录状态
+            return HttpResponseRedirect("/manage/")
 
 
-def detail(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, 'polls/detail.html', {'question': question})
+@login_required
+def manage(request):
+    return render(request, 'manage.html')
 
 
-def results(request, question_id):
-    response = "You're looking at the results of question %s."
-    return HttpResponse(response % question_id)
-
-
-def vote(request, question_id):
-    return HttpResponse("You're voting on question %s" % question_id)
+@login_required
+def login_out(request):
+    return HttpResponseRedirect('/index/')

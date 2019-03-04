@@ -5,6 +5,11 @@ import datetime
 # Create your models here.
 
 
+class Users(models.Model):
+    username = models.CharField(max_length=30)
+    password = models.CharField(max_length=30)
+
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     put_date = models.DateTimeField('date published')  # 日期
