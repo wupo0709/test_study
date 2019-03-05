@@ -6,12 +6,12 @@ from django.contrib import auth
 
 
 # Create your views here.
-# def set_func(func):
-#     def call_func(a):
-#         if a.method == "GET":
-#             return HttpResponse("错误404")
-#         func(a)
-#     return call_func
+def sayhello(request):
+    input = request.GET.get("name", "")
+    if input == "":
+        return HttpResponse("None")
+    else:
+        render(request, "index.html", {"name": input_name})
 
 
 def index(request):
@@ -21,16 +21,12 @@ def index(request):
         username = request.POST.get("username", "")
         password = request.POST.get("password", "")
 
-        if username == "" or password == "":
-            return render(request, 'index.html', {'error': '用户名密码为空'})
-
         user = auth.authenticate(username=username, password=password)
-        if user is None:
-            return render(request, "index.html", {
-                "error": "用户名或密码错误"})
+        if user is not None and user.is_active:
+            auth.login(request, user)
+            return HttpResponseRedirect('/manage/')
         else:
-            auth.login(request, user)  # 记录用户的登录状态
-            return HttpResponseRedirect("/manage/")
+            return render(request, 'index.html', {'error': '用户名密码错误'})
 
 
 @login_required
@@ -40,4 +36,5 @@ def manage(request):
 
 @login_required
 def login_out(request):
+    auth.logout(request)
     return HttpResponseRedirect('/index/')
