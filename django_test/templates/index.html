@@ -4,20 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
+
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js">
+    </script>
 </head>
 
 <body>
-    <form action="/index/" method="post">
-        <p>username:
-            <input type="text" name="username" />
-        </p>
-        <p>password:
-            <input type="password" name="password" />
-        </p>
-        <div style="color:blue">{{ error }}</div>
-        <input type="submit" value="Login" />
-        {%csrf_token%}
-    </form>
+    <div
+        style="height: 1000px; background-image: url(https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1552209186550&di=eb86fb6ef5b5cd3da2a203fee40ca405&imgtype=0&src=http%3A%2F%2Fgss0.baidu.com%2F-Po3dSag_xI4khGko9WTAnF6hhy%2Fzhidao%2Fpic%2Fitem%2F3bf33a87e950352a9d67ee0e5543fbf2b2118bb6.jpg)">
+        <div class="container" style="width:300px">
+            <form class="form-signin" action="/index/" method="post">
+                <h2 class="form-signin-heading" style="text-align: center">测试管理平台</h2>
+                <label for="username" class="sr-only">账号</label>
+                <input type="text" id="username" name="username" class="form-control" placeholder="username">
+                <label for="password" class="sr-only">密码</label>
+                <input type="password" id="password" name="password" class="form-control" placeholder="password">
+                <div style="color:blue">{{ error }}</div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+                {%csrf_token%}
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>

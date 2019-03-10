@@ -11,7 +11,8 @@ def sayhello(request):
     if input == "":
         return HttpResponse("None")
     else:
-        render(request, "index.html", {"name": input_name})
+        return HttpResponse("hello"+input)
+        # render(request, "index.html", {"name": input_name})
 
 
 def index(request):
@@ -20,7 +21,6 @@ def index(request):
     else:
         username = request.POST.get("username", "")
         password = request.POST.get("password", "")
-
         user = auth.authenticate(username=username, password=password)
         if user is not None and user.is_active:
             auth.login(request, user)
@@ -38,3 +38,7 @@ def manage(request):
 def login_out(request):
     auth.logout(request)
     return HttpResponseRedirect('/index/')
+
+
+def xx(request):
+    return render(request, 'xx.html')
