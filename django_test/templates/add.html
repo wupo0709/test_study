@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>加法</title>
+</head>
+
+<body>
+    <input type="text" id="number1" name="number1">
+    <input type="text" id="number2" name="number2">
+    <button type="button" id="btn" onclick="function">计算</button>
+    <input type="text" id="number3" name="number3" value="">
+    <p id="noticeTxt"></p>
+    <script type="text/javascript" src="http://172.18.58.217:8052/js/jquery-3.1.0.min.js"></script>
+    <script>
+        $('#btn').on('click', function () {
+            var data = {
+                number1: $('#number1').val(),
+                number2: $('#number2').val()
+            };
+            if (data.number1 == '') {
+                $('#noticeTxt').html('*用户名不能为空');
+            } else if (data.number2 == '') {
+                $('#noticeTxt').html('*密码不能为空');
+            } else {
+                num3 = Number(data.number1) + Number(data.number2)
+                document.getElementById('number3').value = num3;
+            }
+        })
+    /*
+                                                                                                        function myfunction() {
+                                                                                                            let num1 = document.querySelector("#number1").value;
+                                                                                                            let num2 = document.querySelector("#number2").value;
+                                                                                                            let add = Number(num1) + Number(num2);
+                                                                                                            alert(add)
+                                                                                                        }
+                                                                                                        */
+    </script>
+
+</body>
+
+</html>
