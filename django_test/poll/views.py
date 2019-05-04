@@ -1,23 +1,11 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 
 
 # Create your views here.
-def sayhello(request):
-    if request.method == "GET":
-        num1 = request.GET.get("number1","")
-        num2 = request.GET.get("number2","")
-        num_add = num1+num2
-    return render(request,"add.html",{'add_num':'xxxx'})
-    # input = request.GET.get("name", "")
-    # if input == "":
-    #     return HttpResponse("None")
-    # else:
-    #     return HttpResponse("hello"+input)
-    #     # render(request, "index.html", {"name": input_name})
 
 
 def index(request):

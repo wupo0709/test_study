@@ -10,6 +10,17 @@ class Users(models.Model):
     password = models.CharField(max_length=30)
 
 
+class Project(models.Model):
+    name = models.CharField("名称", max_length=50, null=False)
+    describe = models.TextField("描述", default="")
+    status = models.BooleanField("状态", default=1)
+    update_time = models.DateTimeField(auto_now=True)
+    create_time = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+
 class Question(models.Model):
     question_text = models.CharField(max_length=200)
     put_date = models.DateTimeField('date published')  # 日期
