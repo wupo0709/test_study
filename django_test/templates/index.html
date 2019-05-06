@@ -22,8 +22,8 @@
                 <input type="text" id="username" name="username" class="form-control" placeholder="username">
                 <label for="password" class="sr-only">密码</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="password">
-                <div style="color:blue">{{ error }}</div>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">登陆</button>
+                <div style="color:blue">{{ error }}</div>
                 {%csrf_token%}
             </form>
         </div>

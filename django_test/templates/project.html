@@ -54,13 +54,16 @@
       <h4 class="sub-header">项目列表</h4>
       <div class="table-responsive">
         <table class="table table-striped">
+          {% for project in projects %}
+          {{project.name}}<br>
+          {% endfor %}
           <thead>
             <tr>
-              <th>#</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
-              <th>Header</th>
+              <th>id</th>
+              <th>名称</th>
+              <th>描述</th>
+              <th>状态</th>
+              <th>创建时间</th>
             </tr>
           </thead>
           <tbody>

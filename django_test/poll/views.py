@@ -1,18 +1,12 @@
 from django.shortcuts import render
 from django.shortcuts import render_to_response
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
+from poll.models.project import Project
 
 
 # Create your views here.
-def sayhello(request):
-    input = request.GET.get("name", "")
-    if input == "":
-        return HttpResponse("None")
-    else:
-        return HttpResponse("hello"+input)
-        # render(request, "index.html", {"name": input_name})
 
 
 def index(request):
@@ -38,7 +32,8 @@ def manage(request):
 
 @login_required
 def project_manage(request):
-    return render(request, 'project.html')
+    project_all = Project.objects.all()
+    return render(request, 'project.html', {"projects": project_all})
 
 
 @login_required

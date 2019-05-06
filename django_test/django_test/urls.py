@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from poll import views
+from js_demo import js_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,7 +25,8 @@ urlpatterns = [
     path('manage/', views.manage),
     path('out/', views.login_out),
     path('accounts/login/', views.index),
-    path("hello/", views.sayhello),
     path("project/", views.project_manage),
     path("module/", views.module_manage),
+    path("js/", js_views.index),
+    path("js_jisuan/", js_views.jisuan),
 ]

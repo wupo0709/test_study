@@ -1,0 +1,97 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+    <title>加法</title>
+</head>
+
+<body>
+    <input type="text" id="number1" name="number1">
+    <input type="text" id="number2" name="number2">
+    <button type="button" id="btn" onclick="myFunction">计算</button>
+    <input type="text" id="result" name="number3" value="">
+    <p id="noticeTxt"></p>
+    <script type="text/javascript">
+        function myFunction() {
+            let number1 = document.querySelector("#number1").value;
+            let number2 = document.querySelector("#number2").value;
+            console.log("数字1", number1);
+            console.log("数字2", number2);
+
+            if (number1 === "") {
+                document.querySelector("#number1").style.border = "2px solid red";
+                return;
+            } else {
+                document.querySelector("#number1").style.border = "";
+            }
+            if (number2 === "") {
+                document.querySelector("#number2").style.border = "2px solid red";
+                return;
+            } else {
+                document.querySelector("#number2").style.border = "";
+            }
+
+            $.post("/jisuan/",
+                { num1: number1, num2: number2 },
+                function (result) {
+                    alert("xxxx")
+                    document.querySelector("#result").value = result.data;
+                });
+        }
+                // num3 = Number(data.number1) + Number(data.number2)
+                // document.getElementById('number3').value = num3;
+    </script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery ajax使用</title>
+    <script src="https://cdn.bootcss.com/jquery/1.12.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <input type="text" id="number1">
+    +
+    <input type="text" id="number2">
+    <button type="button" onclick="myFunction()">&nbsp;&nbsp;=&nbsp;&nbsp; </button>
+    <textarea rows="3" cols="20" id="result">
+</textarea>
+
+    <script type="text/javascript">
+        function myFunction() {
+            let number1 = document.querySelector("#number1").value;
+            let number2 = document.querySelector("#number2").value;
+            console.log("数字1", number1);
+            console.log("数字2", number2);
+
+            if (number1 === "") {
+                document.querySelector("#number1").style.border = "2px solid red";
+                return;
+            } else {
+                document.querySelector("#number1").style.border = "";
+            }
+            if (number2 === "") {
+                document.querySelector("#number2").style.border = "2px solid red";
+                return;
+            } else {
+                document.querySelector("#number2").style.border = "";
+            }
+            $.post("/js_jisuan/",
+                { num1: number1, num2: number2 },
+                function (result) {
+                    document.querySelector("#result").value = result;
+                });
+        }
+
+    </script>
+</body>
+
+</html>
