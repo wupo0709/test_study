@@ -4,6 +4,7 @@ from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from poll.models.project import Project
+from poll.models.module import Module
 
 
 # Create your views here.
@@ -29,16 +30,6 @@ def index(request):
 def manage(request):
     return render(request, 'manage.html')
 
-
-@login_required
-def project_manage(request):
-    project_all = Project.objects.all()
-    return render(request, 'project.html', {"projects": project_all})
-
-
-@login_required
-def module_manage(request):
-    return render(request, 'module.html')
 
 
 @login_required

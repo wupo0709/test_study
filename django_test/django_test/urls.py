@@ -17,16 +17,27 @@ from django.contrib import admin
 from django.urls import path
 from poll import views
 from js_demo import js_views
+from poll.views import login_views
+from poll.views import project_views
+from poll.views import module_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index),
-    path('index/', views.index),
-    path('manage/', views.manage),
-    path('out/', views.login_out),
-    path('accounts/login/', views.index),
-    path("project/", views.project_manage),
-    path("module/", views.module_manage),
+    path('', login_views.index),
+    path('index/', login_views.index),
+    path('manage/', login_views.manage),
+    path('out/', login_views.login_out),
+    path('accounts/login/', login_views.index),
+
+    path("project/", project_views.project_manage),
+    path("project/add_project/", project_views.add_project),
+    path("project/edit_project/",project_views.edit_project),
+    path("project/delete_project/",project_views.delete_project),
+
+    path("module/", module_views.module_manage),
+
+
     path("js/", js_views.index),
     path("js_jisuan/", js_views.jisuan),
 ]

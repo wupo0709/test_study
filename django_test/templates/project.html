@@ -50,13 +50,14 @@
       </ul>
     </div>
     <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-      <h4 class="sub-header">项目列表</h4>
+<!--选择性展示项目和创建项目-->
+     {% if type == "list" %}
+      <h4 class="sub-header">项目列表
+        <button type="button" class="btn btn-sm btn-primary" style="float:right" onclick="location.href='/project/add_project/'">创建项目</button>
+      </h4>
+  
       <div class="table-responsive">
         <table class="table table-striped">
-          {% for project in projects %}
-          {{project.name}}<br>
-          {% endfor %}
           <thead>
             <tr>
               <th>id</th>
@@ -64,26 +65,85 @@
               <th>描述</th>
               <th>状态</th>
               <th>创建时间</th>
+              <th>编辑</th>
+              <th>删除</th>
             </tr>
           </thead>
           <tbody>
+            {% for project in projects %}
             <tr>
-              <td>1,001</td>
-              <td>Lorem</td>
-              <td>ipsum</td>
-              <td>dolor</td>
-              <td>sit</td>
+              <td>{{project.id}}</td>
+              <td>{{project.name}}</td>
+              <td>{{project.describe}}</td>
+              <td>
+                {% if project.status == True %}
+                 <span>开启</span>
+                {% else %}
+                 <span>关闭</span>
+                {% endif %}
+              </td>
+              <td>{{project.create_time|date:"Y-m-d H:i:s"}}</td>
+              <td><a href="/project/edit_project/"><i class="glyphicon glyphicon-pencil"></i></a></td>
+              <td><a href="/project/delete_project/"><i class="glyphicon glyphicon-trash"></i></a></td>
             </tr>
-            <tr>
-              <td>1,002</td>
-              <td>amet</td>
-              <td>consectetur</td>
-              <td>adipiscing</td>
-              <td>elit</td>
-            </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>
+      {% endif %}
+
+      {% if type == "add" %}
+        <h4 class="sub-header">添加项目</h4>   
+  <form class="form-horizontal" method="post" action="/project/add_project/">
+    <div class="control-group">
+          <label class="control-label" for="input01">名称</label>
+          <div class="controls">
+            <input type="text" class="input-xlarge" name="name">
+            <span style="color:red">{{name_err}}</span>
+          </div>
+        </div>
+
+    <div class="control-group">
+          <label class="control-label">描述</label>
+          <div class="controls">
+            <div class="textarea">
+                  <textarea style="width:178px" name="describe"> </textarea>
+            </div>
+          </div>
+        </div>
+
+    <div class="control-group">
+          <label class="control-label">状态</label>
+          <div class="controls" style="height:30px">
+            <label class="radio inline" style="left:20px;float:left">
+              <input type="radio" value="1" checked="checked" name="status">
+              开启
+            </label>
+            <label class="radio inline" style="left:50px;float:left">
+              <input type="radio" value="0" name="status">
+              关闭
+            </label>
+          </div>
+        </div>
+
+    <div class="control-group">
+          <div class="controls">
+            <button class="btn btn-success">保存</button><br>
+          </div>
+        </div>
+    </fieldset>
+  </form>
+
+      {% endif %}
+  {% if type == "edit" %}
+      <h4 class="sub-header">编辑项目</h4>
+  {% endif %}
+
+
+  {% if type == "delete" %}
+    <h4 class="sub-header">删除</h4>
+  {% endif %}
+  
     </div>
   </div>
 </div>

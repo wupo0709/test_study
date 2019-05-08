@@ -56,28 +56,23 @@
 				<table class="table table-striped">
 					<thead>
 						<tr>
-							<th>#</th>
-							<th>Header</th>
-							<th>Header</th>
-							<th>Header</th>
-							<th>Header</th>
+							<th>id</th>
+							<th>名称</th>
+							<th>描述</th>
+							<th>创建时间</th>
+							<th>项目id</th>
 						</tr>
 					</thead>
 					<tbody>
+						{% for module in modules %}
 						<tr>
-							<td>1,001</td>
-							<td>Lorem</td>
-							<td>ipsum</td>
-							<td>dolor</td>
-							<td>sit</td>
+							<td>{{module.id}}</td>
+							<td>{{module.name}}</td>
+							<td>{{module.describe}}</td>
+							<td>{{module.create_time}}</td>
+							<td>{{module.project_id}}</td>
 						</tr>
-						<tr>
-							<td>1,002</td>
-							<td>amet</td>
-							<td>consectetur</td>
-							<td>adipiscing</td>
-							<td>elit</td>
-						</tr>
+						{% endfor %}
 					</tbody>
 				</table>
 			</div>
